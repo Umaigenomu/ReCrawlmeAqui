@@ -7,4 +7,8 @@ Stuff to scrape:
   - Title  
   - Complaint (paragraph)  
   - Category/ Service  
-  - Location (Servico Publico)
+  - Location (Servico Publico)  
+  - Date
+  
+  
+  Save each complaint in individual files separated by year and month
