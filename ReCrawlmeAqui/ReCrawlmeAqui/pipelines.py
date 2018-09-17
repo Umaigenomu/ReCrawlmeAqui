@@ -8,4 +8,6 @@
 
 class RecrawlmeaquiPipeline(object):
     def process_item(self, item, spider):
+        # Save item as a pickled file with a MOE name.chan
+
         return item
