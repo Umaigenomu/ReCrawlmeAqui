@@ -21,17 +21,12 @@ class MisakaChan(scrapy.Spider):
         for url in self.start_urls:
             if url == "https://cidadao.reclameaqui.com.br/":
                 yield scrapy.Request(url, callback=self.parse_cidadao)
+            else:
+                yield scrapy.Request(url, callback=self.parse_regular)       
 
-    def parse(self, response):
-        # if response.url == "https://cidadao.reclameaqui.com.br/":
-        self.parse_cidadao(response)
-        # else:
-        #     self.parseRegular(response)
-
-
+           
     def parse_cidadao(self, response):
         # Yield ONLY IF the page is eligible
-        # if ...
         for link in response.xpath('//a/@href').extract():
             if re.search("\d+/.*", link):
                 yield response.follow(link, callback=self.return_item_cidadao)
@@ -39,21 +34,21 @@ class MisakaChan(scrapy.Spider):
                 yield response.follow(link, callback=self.parse_cidadao)
 
     def return_item_cidadao(self, response):
-
+       #TODO: Check if the page is actually correct (though it should only ever get here if it is)
         yield {
-            "titulo": response.xpath("//p[@class='titulo']/text()").extract()[0],
+            "titulo": response.xpath("//section[@class='paperblock']/p[@class='titulo']/text()").extract()[0],
             "reclamacao": "".join(response.xpath("//section[@class='paperblock']/p/text()").extract()),
             "local": response.xpath("//ul[@id='details']/li/p/a/text()").extract()[0],
             "categoria": response.xpath("//ul[@id='details']/li/p/a/text()").extract()[1],
-            "time": response.xpath("//header[@class='header-verrec']/small/text()").extract()[0]
+            "data": response.xpath("//header[@class='header-verrec']/small/text()").extract()[0]
         }
-        for link in response.xpath('//a/@href').extract():
-            if re.search("\d+/.*", link):
-                yield response.follow(link, callback=self.return_item_cidadao)
-            if re.search("cidadao\.reclameaqui.*", link):
-                yield response.follow(link, callback=self.parse_cidadao)
+        self.parse_cidadao(response)
 
-    def parseRegular(self, response):
+    def parse_regular(self, response):
         pass
-# Sample crawl data:
+    
+    def return_item_regular(self, response):
+        pass
+
+    # Sample crawl data:
 # https://cidadao.reclameaqui.com.br/390323/prefeitura-rio-de-janeiro/carro-abandonado-em-via-publica-estacionado-ao-longo-de-via/
