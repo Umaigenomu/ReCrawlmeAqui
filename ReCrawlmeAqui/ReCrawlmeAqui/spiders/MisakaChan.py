@@ -1,16 +1,9 @@
 import scrapy
 import re
+
 class MisakaChan(scrapy.Spider):
     name = "MisakaChan"
     allowed_domains = ['cidadao.reclameaqui.com.br', 'reclameaqui.com.br']
-    # custom_settings = {
-    #     'USER_AGENT': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36",
-    #     'AUTO_THROTTLE_ENABLED': True,
-    #     'COOKIES_ENABLED': False,
-    #     'ITEM_PIPELINES': {
-    #         'ReCrawlmeAqui.pipelines.RecrawlmeaquiPipeline': 300
-    #     }
-    # }
 
     start_urls = (
             "https://cidadao.reclameaqui.com.br/",
