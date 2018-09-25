@@ -1,6 +1,6 @@
 # ReCrawlmeAqui  
 [Sample complaint submission page](https://cidadao.reclameaqui.com.br/390323/prefeitura-rio-de-janeiro/carro-abandonado-em-via-publica-estacionado-ao-longo-de-via/)  
-Stuff scraped:  
+Stuff scraped:
   - Title  
   - Complaint (paragraph)  
   - Category/Service  
